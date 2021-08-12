@@ -33,6 +33,7 @@ Hello : ${user}
                 <th scope="col">name</th>
                 <th scope="col">text</th>
                 <th scope="col">address</th>
+                <th scope="col">type</th>
             </tr>
             </thead>
             <tbody>
@@ -42,6 +43,7 @@ Hello : ${user}
                     <th>${accidents.value.name}</th>
                     <th>${accidents.value.text}</th>
                     <th>${accidents.value.address}</th>
+                    <th>${accidents.value.type.name}</th>
                     <td>
                         <span>
                               <a href="<c:url value='/update?id=${accidents.value.id}'/>">Редактировать</a>

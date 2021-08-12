@@ -2,6 +2,7 @@ package ru.job4j.accident.repository;
 
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
+import ru.job4j.accident.model.AccidentType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,10 +15,26 @@ public class AccidentMem {
     private final AtomicInteger key = new AtomicInteger(0);
 
     private AccidentMem() {
-        accidents.put(key.incrementAndGet(), new Accident(key.get(), "User1", "dtp", "Moscow"));
-        accidents.put(key.incrementAndGet(), new Accident(key.get(), "User2", "speed", "Moscow"));
-        accidents.put(key.incrementAndGet(), new Accident(key.get(), "User3", "speed", "SPB"));
-        accidents.put(key.incrementAndGet(), new Accident(key.get(), "User4", "parking", "EKB"));
+        accidents.put(key.incrementAndGet(), new Accident(key.get(),
+                "User1",
+                "dtp",
+                "Moscow",
+                AccidentType.of(1, "Две машины")));
+        accidents.put(key.incrementAndGet(), new Accident(key.get(),
+                "User2",
+                "speed",
+                "Moscow",
+                AccidentType.of(1, "Две машины")));
+        accidents.put(key.incrementAndGet(), new Accident(key.get(),
+                "User3",
+                "speed",
+                "SPB",
+                AccidentType.of(1, "Две машины")));
+        accidents.put(key.incrementAndGet(), new Accident(key.get(),
+                "User4",
+                "parking",
+                "EKB",
+                AccidentType.of(1, "Две машины")));
     }
 
     private static final class Holder {
@@ -33,6 +50,8 @@ public class AccidentMem {
     }
 
     public void create(Accident accident){
+        AccidentType type = AccidentTypesMem.instOf().getById(accident.getType().getId());
+        accident.setType(type);
         if (accidents.containsKey(accident.getId())){
             accidents.put(accident.getId(), accident);
         } else {
