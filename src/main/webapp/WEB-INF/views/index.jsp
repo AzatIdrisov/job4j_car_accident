@@ -21,9 +21,11 @@
 </head>
 <body>
 Hello : ${user}
-
 <div class="container-fluid">
     <div class="container">
+        <div class="row">
+            <a href="<c:url value='/create'/>">Добавить инцидент</a>
+        </div>
         <table id='table' class="table">
             <thead>
             <tr>
