@@ -33,7 +33,15 @@ public class AccidentMem {
     }
 
     public void create(Accident accident){
-        accident.setId(key.incrementAndGet());
-        accidents.put(accidents.size() + 1, accident);
+        if (accidents.containsKey(accident.getId())){
+            accidents.put(accident.getId(), accident);
+        } else {
+            accident.setId(key.incrementAndGet());
+            accidents.put(accidents.size() + 1, accident);
+        }
+    }
+
+    public Accident findById(int id){
+        return accidents.get(id);
     }
 }

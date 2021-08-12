@@ -36,12 +36,17 @@ Hello : ${user}
             </tr>
             </thead>
             <tbody>
-            <c:forEach items = "${accidents}" var="accidents" varStatus="counter">
+            <c:forEach items="${accidents}" var="accidents" varStatus="counter">
                 <tr>
                     <th>${counter.count}</th>
                     <th>${accidents.value.name}</th>
                     <th>${accidents.value.text}</th>
                     <th>${accidents.value.address}</th>
+                    <td>
+                        <span>
+                              <a href="<c:url value='/update?id=${accidents.value.id}'/>">Редактировать</a>
+                        </span>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
