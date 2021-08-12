@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
+import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.repository.AccidentMem;
 import ru.job4j.accident.repository.AccidentTypesMem;
+import ru.job4j.accident.repository.RulesMem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +23,7 @@ public class AccidentControl {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("types",AccidentTypesMem.instOf().getAll());
+        model.addAttribute("rules", RulesMem.instOf().getAll());
         return "accident/create";
     }
 
