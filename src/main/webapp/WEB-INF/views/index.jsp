@@ -27,13 +27,19 @@ Hello : ${user}
         <table id='table' class="table">
             <thead>
             <tr>
-                <th>Head</th>
+                <th scope="col">№</th>
+                <th scope="col">name</th>
+                <th scope="col">text</th>
+                <th scope="col">address</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach items = "${accidents}" var="accidents">
+            <c:forEach items = "${accidents}" var="accidents" varStatus="counter">
                 <tr>
-                    <th>${accidents}</th>
+                    <th>${counter.count}</th>
+                    <th>${accidents.value.name}</th>
+                    <th>${accidents.value.text}</th>
+                    <th>${accidents.value.address}</th>
                 </tr>
             </c:forEach>
             </tbody>
