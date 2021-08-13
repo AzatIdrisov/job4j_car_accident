@@ -56,7 +56,7 @@ public class AccidentMem {
     }
 
     public void create(Accident accident){
-        AccidentType type = AccidentTypesMem.instOf().getById(accident.getType().getId());
+        AccidentType type = new AccidentTypesMem().getById(accident.getType().getId());
         accident.setType(type);
         if (accidents.containsKey(accident.getId())){
             accidents.put(accident.getId(), accident);

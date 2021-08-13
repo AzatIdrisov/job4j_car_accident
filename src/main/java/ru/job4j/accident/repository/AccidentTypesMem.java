@@ -12,18 +12,10 @@ public class AccidentTypesMem {
     private Map<Integer, AccidentType> accidentTypes = new HashMap<Integer, AccidentType>();
     private final AtomicInteger key = new AtomicInteger(0);
 
-    private AccidentTypesMem() {
+    public AccidentTypesMem() {
         accidentTypes.put(key.incrementAndGet(), AccidentType.of(1, "Две машины"));
         accidentTypes.put(key.incrementAndGet(), AccidentType.of(2, "Машина и человек"));
         accidentTypes.put(key.incrementAndGet(), AccidentType.of(3, "Машина и велосипед"));
-    }
-
-    private static final class Holder {
-        public static final AccidentTypesMem INSTANCE = new AccidentTypesMem();
-    }
-
-    public static AccidentTypesMem instOf() {
-        return AccidentTypesMem.Holder.INSTANCE;
     }
 
     public Collection<AccidentType> getAll() {

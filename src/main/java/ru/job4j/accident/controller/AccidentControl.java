@@ -22,7 +22,7 @@ public class AccidentControl {
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("types",AccidentTypesMem.instOf().getAll());
+        model.addAttribute("types",new AccidentTypesMem().getAll());
         model.addAttribute("rules", RulesMem.instOf().getAll());
         return "accident/create";
     }
@@ -36,7 +36,7 @@ public class AccidentControl {
     @GetMapping("/update")
     public String update(@RequestParam("id") int id, Model model) {
         model.addAttribute("accident", AccidentMem.instOf().findById(id));
-        model.addAttribute("types",AccidentTypesMem.instOf().getAll());
+        model.addAttribute("types",new AccidentTypesMem().getAll());
         return "accident/update";
     }
 }
