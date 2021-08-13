@@ -20,7 +20,6 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-Hello : ${user}
 <div class="container-fluid">
     <div class="container">
         <div class="row">
@@ -34,28 +33,17 @@ Hello : ${user}
                 <th scope="col">Описание</th>
                 <th scope="col">Адрес</th>
                 <th scope="col">Тип</th>
-                <th scope="col">Статьи</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${accidents}" var="accidents" varStatus="counter">
-                <tr>
-                    <th>${counter.count}</th>
-                    <th>${accidents.value.name}</th>
-                    <th>${accidents.value.text}</th>
-                    <th>${accidents.value.address}</th>
-                    <th>${accidents.value.type.name}</th>
-                    <th>
-                    <c:forEach var="rule" items="${accidents.value.rules}" >
-                        ${rule.name}
-                    </c:forEach>
-                    </th>
-                    <td>
-                        <span>
-                              <a href="<c:url value='/update?id=${accidents.value.id}'/>">Редактировать</a>
-                        </span>
-                    </td>
-                </tr>
+            <c:forEach items="${accidents}" var="accident">
+            <tr>
+                <th><c:out value="${accident.id}"/></th>
+                <th><c:out value="${accident.name}"/></th>
+                <th><c:out value="${accident.text}"/></th>
+                <th><c:out value="${accident.address}"/></th>
+                <th><c:out value="${accident.type.name}"/></th>
+            </tr>
             </c:forEach>
             </tbody>
         </table>
