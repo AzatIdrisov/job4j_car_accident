@@ -1,11 +1,21 @@
 package ru.job4j.accident.model;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "accident_type")
 public class AccidentType {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
+
+    @OneToMany(mappedBy = "type")
+    private List<Accident> accidents = new ArrayList<>();
 
     public static AccidentType of(int id, String name) {
         AccidentType type = new AccidentType();
@@ -28,6 +38,10 @@ public class AccidentType {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void addAccident(Accident a) {
+        this.accidents.add(a);
     }
 
     @Override
