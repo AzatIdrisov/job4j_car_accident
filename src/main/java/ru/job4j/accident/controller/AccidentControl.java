@@ -13,9 +13,8 @@ import ru.job4j.accident.repository.AccidentMem;
 import ru.job4j.accident.repository.AccidentTypesMem;
 import ru.job4j.accident.repository.RulesMem;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 @Controller
 public class AccidentControl {
@@ -23,12 +22,18 @@ public class AccidentControl {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("types",new AccidentTypesMem().getAll());
-        model.addAttribute("rules", RulesMem.instOf().getAll());
+        model.addAttribute("rules", new RulesMem().getAll());
         return "accident/create";
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Accident accident) {
+    public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
+        String[] ids = req.getParameterValues("rIds");
+        Set<Rule> rules = new HashSet<>();
+        for(String ruleId: ids){
+            rules.add(new RulesMem().getById(Integer.parseInt(ruleId)));
+        }
+        accident.setRules(rules);
         AccidentMem.instOf().create(accident);
         return "redirect:/";
     }
@@ -37,6 +42,7 @@ public class AccidentControl {
     public String update(@RequestParam("id") int id, Model model) {
         model.addAttribute("accident", AccidentMem.instOf().findById(id));
         model.addAttribute("types",new AccidentTypesMem().getAll());
+        model.addAttribute("rules", new RulesMem().getAll());
         return "accident/update";
     }
 }

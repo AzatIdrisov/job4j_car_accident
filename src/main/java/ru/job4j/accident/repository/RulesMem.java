@@ -11,18 +11,10 @@ import java.util.Map;
 public class RulesMem {
     private final Map<Integer, Rule> rules = new HashMap<>();
 
-    private RulesMem() {
+    public RulesMem() {
         rules.put(1, Rule.of(1, "Статья. 1"));
         rules.put(2, Rule.of(2, "Статья. 2"));
         rules.put(3, Rule.of(3, "Статья. 3"));
-    }
-
-    private static final class Holder {
-        public static final RulesMem INSTANCE = new RulesMem();
-    }
-
-    public static RulesMem instOf() {
-        return RulesMem.Holder.INSTANCE;
     }
 
     public Collection<Rule> getAll() {

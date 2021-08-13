@@ -30,10 +30,11 @@ Hello : ${user}
             <thead>
             <tr>
                 <th scope="col">№</th>
-                <th scope="col">name</th>
-                <th scope="col">text</th>
-                <th scope="col">address</th>
-                <th scope="col">type</th>
+                <th scope="col">Название</th>
+                <th scope="col">Описание</th>
+                <th scope="col">Адрес</th>
+                <th scope="col">Тип</th>
+                <th scope="col">Статьи</th>
             </tr>
             </thead>
             <tbody>
@@ -44,6 +45,11 @@ Hello : ${user}
                     <th>${accidents.value.text}</th>
                     <th>${accidents.value.address}</th>
                     <th>${accidents.value.type.name}</th>
+                    <th>
+                    <c:forEach var="rule" items="${accidents.value.rules}" >
+                        ${rule.name}
+                    </c:forEach>
+                    </th>
                     <td>
                         <span>
                               <a href="<c:url value='/update?id=${accidents.value.id}'/>">Редактировать</a>

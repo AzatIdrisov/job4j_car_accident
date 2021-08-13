@@ -71,6 +71,14 @@ public class Accident {
         this.type = type;
     }
 
+    public Set<Rule> getRules() {
+        return rules;
+    }
+
+    public void setRules(Set<Rule> rules) {
+        this.rules = rules;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
