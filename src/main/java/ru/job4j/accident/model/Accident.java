@@ -1,6 +1,8 @@
 package ru.job4j.accident.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -87,6 +89,13 @@ public class Accident {
 
     public void setRules(Set<Rule> rules) {
         this.rules = rules;
+    }
+
+    public void addRule(Rule rule) {
+        if (rules == null) {
+            rules = new HashSet<>();
+        }
+        rules.add(rule);
     }
 
     @Override

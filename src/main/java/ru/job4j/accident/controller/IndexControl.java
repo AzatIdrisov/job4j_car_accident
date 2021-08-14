@@ -12,9 +12,9 @@ import java.util.List;
 
 @Controller
 public class IndexControl {
-    private final AccidentHibernate accidents;
+    private final AccidentJdbcTemplate accidents;
 
-    public IndexControl(AccidentHibernate accidents) {
+    public IndexControl(AccidentJdbcTemplate accidents) {
         this.accidents = accidents;
     }
 

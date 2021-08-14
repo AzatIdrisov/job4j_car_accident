@@ -33,6 +33,7 @@
                 <th scope="col">Описание</th>
                 <th scope="col">Адрес</th>
                 <th scope="col">Тип</th>
+                <th scope="col">Статья</th>
             </tr>
             </thead>
             <tbody>
@@ -43,6 +44,16 @@
                 <th><c:out value="${accident.text}"/></th>
                 <th><c:out value="${accident.address}"/></th>
                 <th><c:out value="${accident.type.name}"/></th>
+                <th>
+                    <c:forEach var="rule" items="${accident.rules}" >
+                        ${rule.name}
+                    </c:forEach>
+                </th>
+                <td>
+                    <span>
+                        <a href="<c:url value='/update?id=${accident.id}'/>">Редактировать</a>
+                    </span>
+                </td>
             </tr>
             </c:forEach>
             </tbody>
