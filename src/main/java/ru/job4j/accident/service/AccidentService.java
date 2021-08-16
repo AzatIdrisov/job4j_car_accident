@@ -7,28 +7,36 @@ import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.repository.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class AccidentService {
 
-    private final AccidentHibernate accidents;
-    private final AccidentTypeHibernate types;
-    private final RulesHibernate rules;
+    private final AccidentRepository accidents;
+    private final AccidentTypeRepository types;
+    private final RuleRepository rules;
 
 
-    public AccidentService(AccidentHibernate accidents, AccidentTypeHibernate types, RulesHibernate rules) {
+    public AccidentService(AccidentRepository accidents, AccidentTypeRepository types, RuleRepository rules) {
         this.accidents = accidents;
         this.types = types;
         this.rules = rules;
     }
 
+    @Transactional
     public Collection<AccidentType> getALlTypes() {
-        return types.getAll();
+        List<AccidentType> result = new ArrayList<>();
+        types.findAll().forEach(result::add);
+        return result;
     }
 
+    @Transactional
     public Collection<Rule> getAllRules() {
-        return rules.getAll();
+        List<Rule> result = new ArrayList<>();
+        rules.findAll().forEach(result::add);
+        return result;
     }
 
     @Transactional
@@ -36,17 +44,20 @@ public class AccidentService {
         accidents.save(accident);
     }
 
+    @Transactional
     public void addTypeToAccident(Accident accident) {
-        accident.setType(types.getById(accident.getType().getId()));
+        accident.setType(types.findById(accident.getType().getId()).orElse(null));
     }
 
+    @Transactional
     public void setRulesForAccident(Accident accident, String[] ruleIds) {
         for (String idStr: ruleIds) {
-            accident.addRule(rules.getById(Integer.parseInt(idStr)));
+            accident.addRule(rules.findById(Integer.parseInt(idStr)).orElse(null));
         }
     }
 
+    @Transactional
     public Accident getAccidentById(int id) {
-        return accidents.findById(id);
+        return accidents.findById(id).orElse(null);
     }
 }

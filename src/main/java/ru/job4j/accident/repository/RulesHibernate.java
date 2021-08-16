@@ -7,7 +7,7 @@ import ru.job4j.accident.model.Rule;
 
 import java.util.List;
 
-@Repository
+//@Repository
 public class RulesHibernate {
 
     private final SessionFactory sf;
