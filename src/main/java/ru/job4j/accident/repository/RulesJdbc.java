@@ -6,7 +6,7 @@ import ru.job4j.accident.model.Rule;
 
 import java.util.Collection;
 
-@Repository
+//@Repository
 public class RulesJdbc {
     private final JdbcTemplate jdbc;
 
