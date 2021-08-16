@@ -8,9 +8,8 @@ import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.Rule;
 
 import java.util.List;
-import java.util.Set;
 
-//@Repository
+@Repository
 public class AccidentHibernate {
     private final SessionFactory sf;
 
@@ -20,22 +19,20 @@ public class AccidentHibernate {
 
     public Accident save(Accident accident) {
         try (Session session = sf.openSession()) {
-            session.save(accident);
+            session.saveOrUpdate(accident);
             return accident;
         }
     }
 
     public List<Accident> getAll() {
         try (Session session = sf.openSession()) {
-            return  session.createQuery("from Accident", Accident.class)
+            return  session.createQuery("select distinct ac from Accident ac join fetch ac.rules")
                     .list();
         }
     }
     public Accident findById(int id){
         try (Session session = sf.openSession()) {
-            Query query = session.createQuery("from Accident  where  Accident.id =:id", Accident.class);
-            query.setParameter("id", id);
-            return (Accident) query.uniqueResult();
+            return session.get(Accident.class, id);
         }
     }
 }

@@ -1,10 +1,7 @@
 package ru.job4j.accident.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "accident")
@@ -20,13 +17,13 @@ public class Accident {
     @JoinColumn(name = "accident_type_id")
     private AccidentType type;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Rule> rules;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Rule> rules = new ArrayList<>();
 
     public Accident() {
     }
 
-    public Accident(int id, String name, String text, String address, AccidentType type, Set<Rule> rules) {
+    public Accident(int id, String name, String text, String address, AccidentType type, List<Rule> rules) {
         this.id = id;
         this.name = name;
         this.text = text;
@@ -35,7 +32,7 @@ public class Accident {
         this.rules = rules;
     }
 
-    public Accident(String name, String text, String address, AccidentType type, Set<Rule> rules) {
+    public Accident(String name, String text, String address, AccidentType type, List<Rule> rules) {
         this.name = name;
         this.text = text;
         this.address = address;
@@ -83,17 +80,17 @@ public class Accident {
         this.type = type;
     }
 
-    public Set<Rule> getRules() {
+    public List<Rule> getRules() {
         return rules;
     }
 
-    public void setRules(Set<Rule> rules) {
+    public void setRules(List<Rule> rules) {
         this.rules = rules;
     }
 
     public void addRule(Rule rule) {
         if (rules == null) {
-            rules = new HashSet<>();
+            rules = new ArrayList<>();
         }
         rules.add(rule);
     }

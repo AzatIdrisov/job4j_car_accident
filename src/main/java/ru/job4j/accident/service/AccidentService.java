@@ -5,21 +5,19 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentJdbcTemplate;
-import ru.job4j.accident.repository.AccidentTypeJdbc;
-import ru.job4j.accident.repository.RulesJdbc;
+import ru.job4j.accident.repository.*;
 
 import java.util.Collection;
 
 @Service
 public class AccidentService {
 
-    private final AccidentJdbcTemplate accidents;
-    private final AccidentTypeJdbc types;
-    private final RulesJdbc rules;
+    private final AccidentHibernate accidents;
+    private final AccidentTypeHibernate types;
+    private final RulesHibernate rules;
 
 
-    public AccidentService(AccidentJdbcTemplate accidents, AccidentTypeJdbc types, RulesJdbc rules) {
+    public AccidentService(AccidentHibernate accidents, AccidentTypeHibernate types, RulesHibernate rules) {
         this.accidents = accidents;
         this.types = types;
         this.rules = rules;
@@ -38,8 +36,8 @@ public class AccidentService {
         accidents.save(accident);
     }
 
-    public void addTypeToAccident(Accident acc) {
-        acc.setType(types.getById(acc.getType().getId()));
+    public void addTypeToAccident(Accident accident) {
+        accident.setType(types.getById(accident.getType().getId()));
     }
 
     public void setRulesForAccident(Accident accident, String[] ruleIds) {

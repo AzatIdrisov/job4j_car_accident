@@ -6,7 +6,7 @@ import ru.job4j.accident.model.AccidentType;
 
 import java.util.Collection;
 
-@Repository
+//@Repository
 public class AccidentTypeJdbc {
     private final JdbcTemplate jdbc;
 

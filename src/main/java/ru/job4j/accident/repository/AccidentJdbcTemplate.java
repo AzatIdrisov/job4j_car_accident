@@ -14,7 +14,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-@Repository
+//@Repository
 public class AccidentJdbcTemplate {
     private final JdbcTemplate jdbc;
     private final RulesJdbc rules;
@@ -61,7 +61,7 @@ public class AccidentJdbcTemplate {
                     return accident;
                 });
         for (Accident accident : result) {
-            Set<Rule> rules = new HashSet<>();
+            List<Rule> rules = new ArrayList<>();
             for (Integer ruleId : accidentRules.get(accident.getId())) {
                 rules.add(allRules.get(ruleId - 1));
             }
@@ -97,7 +97,7 @@ public class AccidentJdbcTemplate {
                     return accident;
                 });
         for (Accident accident : result) {
-            Set<Rule> rules = new HashSet<>();
+            List<Rule> rules = new ArrayList<>();
             for (Integer ruleId : accidentRules.get(accident.getId())) {
                 rules.add(allRules.get(ruleId - 1));
             }
