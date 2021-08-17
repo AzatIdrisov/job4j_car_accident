@@ -21,6 +21,9 @@
 </head>
 <body>
 <div class="container-fluid">
+    <div>
+        Login as : ${user.username}
+    </div>
     <div class="container">
         <div class="row">
             <a href="<c:url value='/create'/>">Добавить инцидент</a>
