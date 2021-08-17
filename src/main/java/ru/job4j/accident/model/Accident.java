@@ -1,5 +1,8 @@
 package ru.job4j.accident.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -18,7 +21,8 @@ public class Accident {
     private AccidentType type;
 
     @ManyToMany(cascade =  CascadeType.MERGE,
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
     private List<Rule> rules = new ArrayList<>();
 
     public Accident() {
